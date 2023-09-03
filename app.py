@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 
+from config import Config
 from modules import data_handling, preprocessing, analysis, evaluate
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
 
 # index
@@ -90,4 +92,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
