@@ -1,0 +1,170 @@
+{% extends 'base.html' %} {% block body %}
+<div class="result">
+  <div class="result__header">
+    <h2>Result Page</h2>
+    <p>
+      The test results provide a detailed evaluation of the model's performance
+      on the test dataset. This evaluation helps measure the effectiveness and
+      reliability of the sentiment analysis system. Below is an overview of the
+      test accuracy and other important metrics.
+    </p>
+
+    <br />
+
+    <p>
+      <span style="font-weight: bold">note:</span> your tweets column should be
+      named "Text" and make sure the delimiter is semicolon.
+    </p>
+  </div>
+
+  <div class="result__data">
+    <h3>Test Results Overview</h3>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="table__wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Test Accuracy</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1-score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ acc_score_percentage | safe }}</td>
+            <td>{{ precision_percentage }}</td>
+            <td>{{ recall_percentage }}</td>
+            <td>{{ f1_percentage }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br />
+
+    <h3>Confusion Matrix</h3>
+    <p>
+      The confusion matrix presents a summarized view of the model's predictions
+      compared to the actual labels. It provides insights into true positives,
+      true negatives, false positives, and false negatives.
+    </p>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- display the plot -->
+    <img src="{{ chart_img_path }}" alt="Pie Chart" class="pie__chart" />
+  </div>
+
+  <div class="dataset__content">
+    <div class="dataset__content__btn">
+      <h3>Predict New Dataset</h3>
+
+      <br />
+      <hr />
+      <br />
+
+      <form action="" method="POST" enctype="multipart/form-data">
+        <!-- change the text inside input file -->
+        <input type="file" name="file" id="file" class="btn__choose" />
+
+        <button type="submit" class="btn__submit">Submit</button>
+
+        {% if error %}
+        <div class="alert error">{{ error }}</div>
+        {% endif %} {% if success %}
+        <div class="alert success">{{ success }}</div>
+        {% endif %}
+      </form>
+    </div>
+
+    <!-- Display the table -->
+    {% if data_table %}
+    <div class="dataset__content__data">
+      <h4>Dataset Size</h4>
+      <p>Rows: {{ dataset_size[0] }}</p>
+      <p>Columns: {{ dataset_size[1] }}</p>
+
+      <br />
+      <hr />
+      <br />
+      <div class="table__wrapper">{{ data_table | safe }}</div>
+
+      <br /><br />
+
+      <h3>Analyzing The Data</h3>
+
+      <br />
+      <hr />
+      <br />
+
+      <!-- display the plot -->
+      <img
+        src="{{ chart_img_path_result }}"
+        alt="Pie Chart"
+        class="pie__chart"
+      />
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- button to go top -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+  // Get the button:
+  let mybutton = document.getElementById('myBtn');
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = 'block';
+    } else {
+      mybutton.style.display = 'none';
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  // Function to hide the messages after a few seconds
+  function hideMessages() {
+    const errorMessage = document.querySelector('.alert.error');
+    const successMessage = document.querySelector('.alert.success');
+
+    if (errorMessage) {
+      setTimeout(() => {
+        errorMessage.style.display = 'none';
+      }, 5000); // 5000 milliseconds = 5 seconds
+    }
+
+    if (successMessage) {
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000); // 5000 milliseconds = 5 seconds
+    }
+  }
+
+  // Call the function on page load
+  window.onload = hideMessages;
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block body %}
+<div class="home">
+  <div class="home__welcome">
+    <h1>Welcome to the Sentiment Analysis Dashboard!</h1>
+    <p>
+      The primary goal of this system is to help you understand public
+      sentiments related to fuel price increases and other topics more
+      efficiently. You can identify whether the general sentiment is leaning
+      towards positive, negative, or neutral regarding the chosen topic,
+      providing valuable insights. We hope this application will assist you in
+      analyzing and comprehending public sentiments related to fuel price
+      increases and other topics more effectively. Enjoy using the Sentiment
+      Analysis Dashboard!
+    </p>
+  </div>
+
+  <div class="home__content">
+    <div class="home__how">
+      <h2>Application Workflow</h2>
+      <ol>
+        <li>
+          Upload Data: Upload a dataset containing text or reviews related to
+          the topic you want to analyze sentiments for.
+        </li>
+        <li>
+          Preprocessing: Perform data preprocessing, such as removing
+          punctuation, converting text to lowercase, and more.
+        </li>
+        <li>
+          Feature Extraction: Select relevant features from the text data, such
+          as unigrams, bigrams, or TF-IDF.
+        </li>
+        <li>
+          Model Training: Train the Naive Bayes Classifier based on the
+          processed data and extracted features.
+        </li>
+        <li>
+          Sentiment Analysis: Use the trained model to analyze sentiments in the
+          input text.
+        </li>
+      </ol>
+    </div>
+
+    <div class="home__contact">
+      <h2>Contact Us</h2>
+      <p>
+        Our mailing address is: <br />
+        West Sumatera, Indonesia <br />
+        Phone: 0851-56181581
+      </p>
+      <div class="home__contact__social">
+        <a href="mailto:muhalifhanafiah@gmail.com" target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="https://www.instagram.com/alifff_hanafiah" target="_blank">
+          <i class="fa-brands fa-square-instagram"></i>
+        </a>
+        <a href="https://github.com/alifhanafiah" target="_blank">
+          <i class="fa-brands fa-square-github"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/alifhanafiah" target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

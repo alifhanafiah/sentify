@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block body %}
+<div class="dataset">
+  <div class="dataset__header">
+    <h2>Dataset Management Page</h2>
+    <p>
+      Below is the collection of documents used as training and testing data for
+      the sentiment analysis system. You can add new documents to the collection
+      by clicking the "Browse" button and submit it. The dataset allows the
+      system to learn and improve its classification accuracy.
+    </p>
+    <br />
+    <p>
+      Your csv file have to be formatted like this and make sure the delimiter
+      is semicolon.
+    </p>
+    <div class="header__example">
+      <table>
+        <tr>
+          {% for column in columns %}
+          <td>{{ column }}</td>
+          {% endfor %}
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="dataset__content">
+    <div class="dataset__content__btn">
+      <form action="" method="POST" enctype="multipart/form-data">
+        <!-- change the text inside input file -->
+        <input type="file" name="file" id="file" class="btn__choose" />
+
+        <button type="submit" class="btn__submit">Submit</button>
+
+        {% if error %}
+        <div class="alert error">{{ error }}</div>
+        {% endif %} {% if success %}
+        <div class="alert success">{{ success }}</div>
+        {% endif %}
+      </form>
+    </div>
+
+    <!-- Display the table -->
+    {% if data_table %}
+    <div class="dataset__content__data">
+      <h4>Dataset Size</h4>
+      <p>Rows: {{ dataset_size[0] }}</p>
+      <p>Columns: {{ dataset_size[1] }}</p>
+
+      <br />
+      <hr />
+      <br />
+      <div class="table__wrapper">{{ data_table | safe }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- button to go top -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+  // Get the button:
+  let mybutton = document.getElementById('myBtn');
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = 'block';
+    } else {
+      mybutton.style.display = 'none';
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  // Function to hide the messages after a few seconds
+  function hideMessages() {
+    const errorMessage = document.querySelector('.alert.error');
+    const successMessage = document.querySelector('.alert.success');
+
+    if (errorMessage) {
+      setTimeout(() => {
+        errorMessage.style.display = 'none';
+      }, 5000); // 5000 milliseconds = 5 seconds
+    }
+
+    if (successMessage) {
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000); // 5000 milliseconds = 5 seconds
+    }
+  }
+
+  // Call the function on page load
+  window.onload = hideMessages;
+</script>
+{% endblock %}

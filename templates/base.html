@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentimen Analisis</title>
+
+    <!-- link font style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Vollkorn:ital,wght@1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- link favicon -->
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+
+    <!-- link css -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="logo">{% include 'includes/_logo.html' %}</div>
+
+      <ul class="nav__list">
+        {% include 'includes/_navitem.html' %}
+      </ul>
+
+      <div class="profile">{% include 'includes/_profile.html' %}</div>
+    </nav>
+
+    <main class="main">{% block body %}{% endblock %}</main>
+
+    <!-- link fa icon -->
+    <script
+      src="https://kit.fontawesome.com/40cc47ac2b.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

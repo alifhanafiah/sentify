@@ -1,0 +1,121 @@
+{% extends 'base.html' %} {% block body %}
+<div class="train">
+  <div class="train__header">
+    <h2>Model Training Page</h2>
+    <p>
+      The model training process is shown below. It involves pre-processing the
+      dataset, transforming it using TF-IDF (Term Frequency-Inverse Document
+      Frequency), and training using the Naive Bayes classifier. This process
+      allows the model to learn from the dataset and make accurate sentiment
+      predictions.
+    </p>
+
+    <br />
+
+    <p>
+      <span style="font-weight: bold">note:</span> dictionary for terms after
+      stemming is already done to cut total processed time (18m)
+    </p>
+  </div>
+
+  <div class="train__preprocess">
+    <h3>Preprocessing</h3>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- Display the table -->
+    {% if data_preprocessed_head %}
+    <div class="table__wrapper">{{ data_preprocessed_head | safe }}</div>
+    {% endif %}
+  </div>
+
+  <div class="train__analyze">
+    <h3>Analyzing The Data</h3>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- display the plot -->
+    <img src="{{ chart_img_path }}" alt="Pie Chart" class="pie__chart" />
+
+    <h4>Convert Tweets and Label</h4>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- Display the table -->
+    {% if data_analyze_head %}
+    <div class="table__wrapper">{{ data_analyze_head | safe }}</div>
+    {% endif %}
+
+    <br />
+
+    <h4>Ranking for Term TF-IDF</h4>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- Display the table -->
+    {% if data_ranking_head %}
+    <div class="table__wrapper">{{ data_ranking_head | safe }}</div>
+    {% endif %}
+
+    <br />
+
+    <h4>Classification (Multinomial Naive Bayes)</h4>
+
+    <br />
+    <hr />
+    <br />
+
+    <p>
+      <span style="font-weight: bold">Split Amount:</span> {{ split_amount }}
+    </p>
+    <p>
+      <span style="font-weight: bold">Training Data:</span> {{ training_data }}
+    </p>
+    <p>
+      <span style="font-weight: bold">Testing Data:</span> {{ testing_data }}
+    </p>
+
+    <a class="btn__train" href="/result">Start Training</a>
+  </div>
+</div>
+
+<!-- button to go top -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+  // Get the button:
+  let mybutton = document.getElementById('myBtn');
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      mybutton.style.display = 'block';
+    } else {
+      mybutton.style.display = 'none';
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+</script>
+{% endblock %}
