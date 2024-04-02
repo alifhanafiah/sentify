@@ -7,9 +7,8 @@ import string
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-# # Run once for nltk
-# nltk.download("punkt")
-# nltk.download("stopwords")
+nltk.download("punkt")
+nltk.download("stopwords")
 
 # get indonesian stopwords
 list_stopwords = stopwords.words("indonesian")
